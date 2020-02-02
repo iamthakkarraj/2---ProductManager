@@ -1,0 +1,66 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background: #e8e8e8;
+}
+.pagination li {
+    display: block;
+    border: 1px solid #e8e8e8;
+    background-color: white;
+    padding:5px 20px 5px 20px;
+    border-radius:4px;
+    box-shadow: #eeeeee 0px 16px 32px 0px;
+    margin: 0px 4px 0px 0px;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+input:hover::-webkit-input-placeholder {
+    transition:color linear 0.2s;
+    color: #ffff;
+}
+textarea:hover::-webkit-input-placeholder {
+    transition: color linear 0.2s;
+    color: #ffff;
+}
+textarea{
+    resize: none;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+.shadow-sm{
+    box-shadow: #e8e8e8 0px 16px 32px 0px;
+}
+
+.form-control {
+    padding: 8px 4px 8px 4px;    
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    margin-bottom:16px;
+}
+
+.form-control:hover{
+    transition:background-color linear 0.2s;
+    background-color: #007bff;
+    color: #ffff;
+    text-decoration-color:#ffff;
+}
+
+.text-danger{
+    font-size:small;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}

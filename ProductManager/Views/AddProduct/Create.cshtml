@@ -1,0 +1,102 @@
+﻿@model ProductManager.ViewModels.ProductViewModel
+
+@{ ViewBag.Title = "Create"; }         
+
+@*Input Form Begin*@              
+    <form id="add-product-form" method="post" action="/AddProduct/Create" enctype="multipart/form-data">
+
+        @{ if (ViewBag.Message != null) {
+                <div class="alert alert-success pb-2 mt-1">
+                    <strong>@ViewBag.MTitle</strong> @ViewBag.Message
+                </div>
+            }
+        }
+
+        @{ if (ViewBag.Error != null) {
+                <div class="alert alert-danger pb-2 mt-1">
+                    <strong>@ViewBag.MTitle</strong> @ViewBag.Error
+                </div>
+            }
+        }
+
+        @*First Row Begin*@
+        <div class="form-group row card-group mt-1 justify-content-around">
+            @*First Card Begin*@
+            <div class="card-body bg-white text-dark mb-2 border-primary rounded shadow-sm" style="max-width:300px; min-width:250px; border-top: 5px solid red;">
+                @*Product Details Section Begin*@
+                <fieldset>
+                    @*Title*@
+                    <legend>&#128441; Details</legend>
+                    @*Product Name*@
+                    @Html.LabelFor(model => model.Product.Name)
+                    @Html.ValidationMessageFor(model => model.Product.Name, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Product.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Product Name" } })
+                    @*Product Category*@
+                    @Html.LabelFor(model => model.Product.Category)
+                    @Html.ValidationMessageFor(model => model.Product.Category, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.Product.Category, new SelectList(Model.CategoryList, "Id", "Name"), "Select Category", new { @class = "form-control" })
+                    @*Product Price*@
+                    @Html.LabelFor(model => model.Product.Price)
+                    @Html.ValidationMessageFor(model => model.Product.Price, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Product.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "Product Price", value = "" } })
+                    @*Product Quantity*@
+                    @Html.LabelFor(model => model.Product.Quantity)
+                    @Html.ValidationMessageFor(model => model.Product.Quantity, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Product.Quantity, new { htmlAttributes = new { @class = "form-control", Placeholder = "Product Quantity", value = "" } })
+                </fieldset>
+                @*Product Details Section End*@
+            </div>
+            @*First Card End*@
+            @*Second Card Begin*@
+            <div class="card-body bg-white text-dark mb-2 border-primary rounded shadow-sm" style="max-width:300px; min-width:250px; border-top: 5px solid red;">
+                @*Product Description Section Begin*@
+                <fieldset>
+                    @*Title*@
+                    <legend>&#128464; Description</legend>
+                    @*Product Short Description*@
+                    @Html.LabelFor(model => model.Product.ShortDsc)
+                    @Html.ValidationMessageFor(model => model.Product.ShortDsc, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.Product.ShortDsc, new { @class = "form-control", @row = "5", @placeholder = "Write Short Description of The Product", maxlength = 25 })
+                    @*Product Long Description*@
+                    @Html.LabelFor(model => model.Product.LongDsc)
+                    @Html.ValidationMessageFor(model => model.Product.LongDsc, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.Product.LongDsc, new { @class = "form-control", @placeholder = "Write Brief Description of The Product", maxlength = 100 })
+                </fieldset>
+                @*Product Description Section End*@
+            </div>
+            @*Second Card End*@
+            @*Third Card Start*@
+            <div class="card-body bg-white text-dark mb-2 border-primary rounded shadow-sm" style="max-width:300px; min-width:250px; border-top: 5px solid red;">
+                @*Product Image Section Begin*@
+                <fieldset>
+                    @*Title*@
+                    <legend>&#128448; Image</legend>
+                    @*Product Small Image*@
+                    @Html.LabelFor(model => model.Product.F_ImageLg)
+                    @Html.ValidationMessageFor(model => model.Product.F_ImageSm, "", new { @class = "text-danger" })
+                    <label class="btn btn-block btn-file bg-primary text-light">
+                        @Html.TextBoxFor(model => model.Product.F_ImageSm, new { type = "File", @class = "text-box" })
+                    </label>
+                    @*Prodcut Large Image*@
+                    @Html.LabelFor(model => model.Product.F_ImageSm)
+                    @Html.ValidationMessageFor(model => model.Product.F_ImageLg, "", new { @class = "text-danger" })
+                    <label class="btn btn-block btn-file bg-primary text-light">
+                        @Html.TextBoxFor(model => model.Product.F_ImageLg, new { type = "File" })
+                    </label>
+                </fieldset>
+                @*Product Image Section End*@
+            </div>
+            @*Third Card End*@
+            @*Fourth Card Begin*@
+        <div class="card-body mr-lg-auto pl-3 mt-3 mr-sm-0 bg-transparent p-0 text-dark mb-2" style="max-width:300px; min-width:250px;">
+            @Html.HiddenFor(m => m.Product.Id)
+            @*Add Button*@
+            <input name="submit" class="btn btn-primary btn-lg" type="submit" value="Add" style="width:132px;" />
+            @*Reset Button*@
+            <input name="Reset" class="btn btn-lg ml-2 btn-danger" type="reset" value="⟳ Reset" style="width:132px;" />
+        </div>
+            @*Fourth Card End*@
+        </div>
+        @*First Row End*@
+    </form>
+@*Input Form End*@                     

@@ -1,0 +1,104 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<ProductManager.Models.Product>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{ if (ViewBag.Message != null) {
+        <div class="alert alert-success pb-2 mt-1">
+            @ViewBag.Message
+        </div>
+    }
+}
+
+@{ if (ViewBag.Error != null) {
+        <div class="alert alert-success pb-2 mt-1">
+            @ViewBag.Message
+        </div>
+    }
+}
+
+@using (Html.BeginForm("Search", "ListProduct", FormMethod.Get, new { @class = "mt-2" })) {
+
+    <b> Search Option: </b>
+
+    @Html.RadioButton("option", "Name", new { @class = "ml-2 pt-3", @checked = "true" })
+    <text>Name</text>
+    @Html.RadioButton("option", "Category", new { @class = "ml-2 pt-3" })
+    <text>Category</text>
+    @Html.TextBox("search", "", new { @class = "rounded border shadow-sm px-1 mx-2 pb-2 pt-1" })
+    <input type="submit" class="btn btn-primary" name="submit" value="Search" />
+
+}
+
+<table class="mt-3 table card-body table-striped bg-white table-bordered table-sm shadow-sm border-primary" style="border-top: 5px solid red;">
+    <tr class="rounded-top">
+        <th>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ImageSm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ShortDsc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().LongDsc)
+        </th>
+    </tr>
+
+
+    @{
+        if (Model.Count() == 0) {
+            <tr> <td colspan="8" class="text-success text-center"> No Records Found. </td> </tr>
+        } else {
+            foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "AddProduct", new { id = item.Id }, null)
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                    <td>
+                        <img src="~/Uploads/@item.ImageSm.Trim()" alt="@item.Name" style="max-height:100px;max-width:100px" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShortDsc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LongDsc)
+                    </td>
+                </tr>
+
+            }
+        }
+    }
+
+</table>
+
+@Html.PagedListPager(Model, no => Url.Action("Index", new { no}))

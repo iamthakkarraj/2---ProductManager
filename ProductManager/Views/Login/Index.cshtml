@@ -1,0 +1,66 @@
+﻿@model ProductManager.Models.User
+@{
+    Layout = null;
+    ViewBag.Title = "Login";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Product Manager</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @*Navbar Begin*@
+    <div class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow-sm">
+        @*Title*@
+        <a href="#" class="navbar-brand">Product Manager</a>        
+    </div>
+    @*Navbar End*@
+    @*Main Container Begin*@
+    <div class="container-fluid body-content d-flex justify-content-center">
+        @*First Row Begin*@
+        <div class="card-body position-relative" style="max-width:350px;">
+            @*Login Form Begin*@
+            <form method="post" action="/Login/Index">
+                <div class="card-body ml-2 bg-white text-dark rounded shadow-sm border-primary" style="border-top:5px solid red;">
+                    <fieldset>
+                        @*Title*@
+                        <legend>User Login</legend>
+                        @*Seprator*@
+                        <hr />
+                        @{ if (ViewBag.message != null) {
+                                <div class="alert alert-danger">
+                                    <strong>Invalid!</strong> @ViewBag.message
+                                </div>
+                            }
+                        }
+                        @*Username*@
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username" } })
+                        @*Password*@                        
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type="password" ,@placeholder = "Password" } })
+                        @*Submit*@
+                        <input name="submit" class="form-control" value="Submit" type="submit" />
+                    </fieldset>
+                </div>
+                @*First Card End*@
+            </form>
+            @*Login Form End*@
+        </div>
+        @*First Row End*@
+    </div>
+    @*Main Container End*@
+    @*Seprator*@
+    <hr class="mx-3" />
+    @*Footer*@
+    <footer class="mx-5">
+        <p>&copy; @DateTime.Now.Year - Product Manager</p>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")    
+</body>
+</html>
